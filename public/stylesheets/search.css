@@ -1,0 +1,18 @@
+.newAdipocytesImage {
+  background-image: url("../images/newAdipocytes_52.png");
+  background-repeat: no-repeat;
+  border-radius: 5px;
+}
+table.searchResults {
+  width: 97%;
+  margin: 2px 5px 2px 5px;
+  cursor: pointer;
+}
+table.searchResults tr:hover { background-color: #ffffe0; }
+table.searchResults tr { border-bottom: 1px solid #e0dfdb; }
+table.searchResults tr th {
+  text-align: left;
+  background-color: #ffe4b5;
+  padding: 5px;
+}
+table.searchResults tr td { padding: 4px; }

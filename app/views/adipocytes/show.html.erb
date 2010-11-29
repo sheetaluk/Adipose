@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Userid:</b>
+  <%= @adipocyte.userId %>
+</p>
+
+<p>
+  <b>Subject:</b>
+  <%= @adipocyte.subject %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @adipocyte.content %>
+</p>
+
+<p>
+  <b>Novotes:</b>
+  <%= @adipocyte.noVotes %>
+</p>
+
+<p>
+  <b>Enabled:</b>
+  <%= @adipocyte.enabled %>
+</p>
+
+
+<%= link_to 'Edit', edit_adipocyte_path(@adipocyte) %> |
+<%= link_to 'Back', adipocytes_path %>

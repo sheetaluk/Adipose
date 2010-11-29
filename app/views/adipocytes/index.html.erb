@@ -1,0 +1,31 @@
+<h1>Listing adipocytes</h1>
+
+<table>
+  <tr>
+    <th>Userid</th>
+    <th>Subject</th>
+    <th>Content</th>
+    <th>Novotes</th>
+    <th>Enabled</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @adipocytes.each do |adipocyte| %>
+  <tr>
+    <td><%= adipocyte.userId %></td>
+    <td><%= adipocyte.subject %></td>
+    <td><%= adipocyte.content %></td>
+    <td><%= adipocyte.noVotes %></td>
+    <td><%= adipocyte.enabled %></td>
+    <td><%= link_to 'Show', adipocyte %></td>
+    <td><%= link_to 'Edit', edit_adipocyte_path(adipocyte) %></td>
+    <td><%= link_to 'Destroy', adipocyte, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Adipocyte', new_adipocyte_path %>

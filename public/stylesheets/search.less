@@ -1,0 +1,37 @@
+@import "definitions.less";
+
+.newAdipocytesImage
+{
+  background-image: url("../images/newAdipocytes_52.png");
+  background-repeat: no-repeat;
+  border-radius: 5px;
+}
+
+table.searchResults
+{
+  width: 97%; 
+  margin: 2px 5px 2px 5px;
+  cursor: pointer;
+
+  tr:hover
+  {
+    background-color: @colorLightYellow;
+  }
+
+  tr
+  {
+    border-bottom: 1px solid @colorStainlessSteel;
+
+    th
+    {
+      text-align: left;
+      background-color: @colorMoccasin;
+      padding: 5px;
+    }
+
+    td
+    {
+      padding: 4px;
+    }
+  }
+}

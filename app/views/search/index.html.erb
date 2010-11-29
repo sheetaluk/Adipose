@@ -1,0 +1,40 @@
+<div class="contentPane">
+  <div class="contentTitle newAdipocytesImage">
+    Recently Created Adipocytes
+  </div><!--#contentTitle-->
+  <div class="contentBody">
+    <div class="listAdiposts">
+      <table class="searchResults">
+        <tr>
+          <th>Created By</th>
+          <th>Subject</th>
+          <th>Created On</th>
+          <th>Votes</th>
+        </tr>
+        <% @adipocytes.each do |adipocyte| %>
+          <% if adipocyte.enabled %>
+            <% rowEnabled = "enabled" %>
+          <% else %>
+            <% rowEnabled = "disabled" %>
+          <% end %>
+          <tr class="<%= rowEnabled%> searchResult" data-id="<%= adipocyte.id %>">
+            <td><%= adipocyte.userId %></td>
+            <td><%= adipocyte.subject %></td>
+            <td>
+              <%= adipocyte.created_at%>
+            </td>
+            <td><%= adipocyte.noVotes %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div><!--#listAdiposts-->
+  </div><!--.contentBody-->
+</div><!--.contentPane-->
+<script type="text/javascript">
+  $(document).ready(function()
+  {
+    $(".searchResult").click(function(){
+      document.location = "/adipocytes/"+$(this).attr('data-id');
+    });
+  });
+</script>

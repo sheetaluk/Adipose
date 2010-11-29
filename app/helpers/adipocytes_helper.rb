@@ -1,0 +1,2 @@
+module AdipocytesHelper
+end

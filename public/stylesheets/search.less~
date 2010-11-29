@@ -1,0 +1,6 @@
+.newAdipocytesImage
+{
+  background-image: url("../images/newAdipocytes_52.png");
+  background-position: 5% 5%;
+  background-repeat: no-repeat;
+}
