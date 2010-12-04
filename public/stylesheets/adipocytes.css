@@ -1,0 +1,68 @@
+.adipocyteImage {
+  background-image: url("../images/adipocyte_52.png");
+  background-repeat: no-repeat;
+  border-radius: 5px;
+  margin: right: 4px;
+}
+.adipocyteInfoBorder {
+  border-radius: 7px;
+  border: 1px solid #eee9bf;
+  margin: 7px 5px;
+  padding: 7px;
+}
+.adipocyteTitle { margin-left: 25px; }
+.adipocyteInfo .basicInfo {
+  border-radius: 7px;
+  border: 1px solid #eee9bf;
+  margin: 7px 5px;
+  padding: 7px;
+}
+.adipocyteInfo .basicInfo table th {
+  color: #757575;
+  font-weight: normal;
+  font-size: normal;
+}
+.adipocyteInfo .adipocyteFeatures #votes {
+  border-radius: 7px;
+  border: 1px solid #eee9bf;
+  margin: 7px 5px;
+  padding: 7px;
+  color: #71c671;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 10px;
+  padding: 45px 5px 5px 22px;
+}
+.adipocyteInfo .adipocyteFeatures #tags {
+  border-radius: 7px;
+  border: 1px solid #eee9bf;
+  margin: 7px 5px;
+  padding: 7px;
+  padding: 10px;
+  min-height: 35px;
+}
+.adipocyteInfo .adipocyteFeatures #tags .tag {
+  float: left;
+  border: 1px solid #a6a6a6;
+  background-color: #c5e3bf;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 3px;
+}
+.adipocyteInfo .adipocyteContent {
+  border-radius: 7px;
+  border: 1px solid #eee9bf;
+  margin: 7px 5px;
+  padding: 7px;
+}
+.adipocyteInfo .adipocyteActions {
+  border-radius: 7px;
+  border: 1px solid #eee9bf;
+  margin: 7px 5px;
+  padding: 7px;
+}
+.votesImage {
+  background-image: url("../images/thumbsUp_70.png");
+  background-repeat: no-repeat;
+  background-position: 1% 1%;
+}
