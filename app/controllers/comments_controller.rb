@@ -5,6 +5,6 @@ class CommentsController < ApplicationController
       @adipocyte.comments.create(
         :commenter => params[:commenter],
         :content => params[:content])
-    render :json => {:success => true, :commentId => @comment.id}
+    render :json => {:success => true, :commentId => @comment.id, :commenter => @comment.commenter}
   end
 end

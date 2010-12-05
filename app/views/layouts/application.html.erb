@@ -113,6 +113,16 @@
         },
       });
     }
+
+    function clearForm()
+    {
+      $(".formField :input").each(function(){
+        $(this).val('');
+      });
+      $(".formField textarea").each(function(){
+        $(this).val('');
+      });
+    }
  
     $(document).ready(function()
     {
@@ -159,12 +169,7 @@
       });      
 
       $(".clearButton").click(function(){
-        $(".formField :input").each(function(){
-          $(this).val('');
-        });
-        $(".formField textarea").each(function(){
-          $(this).val('');
-        });
+        clearForm();
       });
     });
   </script>

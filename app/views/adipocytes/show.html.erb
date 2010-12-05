@@ -80,43 +80,50 @@
           <% commentHeading = "No Comments" %>
         <% else %>  
           <% commentDivHeadingClass = "commentDivHeading"%>
-          <% commentHeading = "Comments" %>
+          <% commentHeading = "" %>
         <% end %>  
         <div class="<%=commentDivHeadingClass%>">
           <%=commentHeading%>
         </div>
-        <% @adipocyte.comments.each do |comment| %>
-          <div id="commentsDiv">
-            <div id="commentsCommentId"> 
+        <table id="commentsTable">
+          <% @adipocyte.comments.each do |comment| %>
+          <tr class="commentsRow">
+            <td class="commentsCommentId postitImage"> 
               <%= comment.id %>
-            </div><!--#commentsCommentId-->
-            <div id="commentsComment">
-              <div id="commentsCommentInfo">
-                <%= comment.commenter %>
-                on
-                <%= comment.created_at %>
-              </div><!--#commentsCommentInfo-->
-              <div id="commentsCommentContent">
+            </td><!--.commentsCommentId-->
+            <td class="commentsComment">
+              <div class="commentsCommentInfo">
+                <span class="commentsCommenter">
+                  <%= comment.commenter %>,
+                </span>
+                <span class="commentsCreated">
+                  <%= comment.created_at.to_s(format = :long) %>
+                </span>
+              </div><!--.commentsCommentInfo-->
+              <div class="commentsCommentContent">
                 "
                 <%= comment.content %>
                 "
-              </div><!--#commentsCommentContent-->
-            </div><!--#commentsComment-->
-          </div>
-        <% end %>
+              </div><!--.commentsCommentContent-->
+            </td><!--.commentsComment-->
+          </tr><!--.commentsRow-->
+          <% end %>
+        </table><!--#commentsTable-->
       </div>
     </div><!--.adipocyteInfo-->
   </div><!--.contentBody-->
   <div id="newCommentModal" title="Create New Comment">
     <%= form_for([@adipocyte, @adipocyte.comments.build]) do |f| %>
-      <div class="field">
+    <div class="commentForm">
+      <div class="formField">
         <%= f.label :commenter %><br />
         <%= f.text_field :commenter %>
       </div>
-      <div class="field">
+      <div class="formField">
         <%= f.label :content %><br />
         <%= f.text_area :content %>
       </div>
+    </div>
     <% end %>
   </div><!--#newCommentModal-->
 </div><!--.contentPane-->
@@ -143,7 +150,30 @@
             $("#newCommentModal").dialog("destroy");
             if(data.success)
             {
-              alert("pooo");
+              $("#commentsTable").append(
+                "<tr class='commentsRow'>"
+                +"<td class='commentsCommentId postitImage'>"
+                +data.commentId
+                +"</td>"
+                +"<td class='commentsComment'>"
+                +"<div class='commentsInfo'>"
+                +"<span class='commentsCommenter'>"
+                +data.commenter
+                +", "
+                +"</span>"
+                +"<span class='commentsCreated'>"
+                +"Just now"
+                +"</span>"
+                +"</div>"
+                +"<div class='commentsCommentContent'>"
+                +"\" "
+                +$("#comment_content").val()
+                +" \" "
+                +"</div>"
+                +"</td>"
+                +"</tr>"
+              );
+              clearForm();
             }
             else
             {

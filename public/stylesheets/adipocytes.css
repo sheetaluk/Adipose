@@ -4,6 +4,11 @@
   border-radius: 5px;
   margin: right: 4px;
 }
+.postitImage {
+  background-image: url("../images/postit_40.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
 .adipocyteInfoBorder {
   border-radius: 7px;
   border: 1px solid #eee9bf;
@@ -67,6 +72,11 @@
   margin: 7px 5px;
   padding: 7px;
 }
+.adipocyteInfo .adipocyteComments .commentDivHeading {
+  margin: 0 0px 12px 0px;
+  color: #757575;
+  font-size: 14px;
+}
 .votesImage {
   background-image: url("../images/thumbsUp_70.png");
   background-repeat: no-repeat;
@@ -74,9 +84,34 @@
 .adipocyteForm div.formField { margin: 17px 7px; }
 .adipocyteForm div.formField input { width: 96%; }
 .adipocyteForm div.formField textarea { width: 96%; }
+.adipocyteForm div.formField textarea { height: 250px; }
 .adipocyteForm div.actions { margin: 8px 0px 12px 65%; }
 .adipocyteForm hr {
   width: 96%;
   color: #e0dfdb;
   background-color: #e0dfdb;
+}
+.commentForm div.formField { margin: 17px 7px; }
+.commentForm div.formField input { width: 96%; }
+.commentForm div.formField textarea { width: 96%; }
+.commentForm div.formField textarea { height: 250px; }
+.commentForm div.actions { margin: 8px 0px 12px 65%; }
+.commentForm hr {
+  width: 96%;
+  color: #e0dfdb;
+  background-color: #e0dfdb;
+}
+table#commentsTable tbody tr.commentsRow td {
+  padding: 10px;
+  color: black;
+}
+table#commentsTable tbody tr.commentsRow td.commentsCommentId {
+  padding-top: 5%;
+  font-weight: bold;
+  color: #757575;
+}
+table#commentsTable tbody tr.commentsRow td.commentsComment .commentsCommenter { color: #733d1a; }
+table#commentsTable tbody tr.commentsRow td.commentsComment .commentsCreated {
+  font-size: 10px;
+  color: #006400;
 }

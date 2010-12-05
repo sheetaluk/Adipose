@@ -125,22 +125,22 @@ body .contentPane .contentBody {
   margin: 10px 5px;
   border: 1px solid #ffffe0;
 }
-body .contentPane .formField label { color: #757575; }
-body .contentPane .formField input {
-  border: 1px solid #a6a6a6;
-  border-radius: 5px;
-  padding: 5px;
-}
-body .contentPane .formField textarea {
-  border: 1px solid #a6a6a6;
-  border-radius: 5px;
-  padding: 5px;
-}
-body .contentPane .formField input:focus { border: 2px solid #757575; }
-body .contentPane .formField textarea:focus { border: 2px solid #757575; }
 body .contentPane .dimNoteMedium {
   text-align: center;
   color: #a6a6a6;
   font-weight: bold;
   font-size: 14px;
 }
+.formField label { color: #757575; }
+.formField input {
+  border: 1px solid #a6a6a6;
+  border-radius: 5px;
+  padding: 5px;
+}
+.formField textarea {
+  border: 1px solid #a6a6a6;
+  border-radius: 5px;
+  padding: 5px;
+}
+.formField input:focus { border: 2px solid #757575; }
+.formField textarea:focus { border: 2px solid #757575; }
