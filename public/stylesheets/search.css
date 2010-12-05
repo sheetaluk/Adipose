@@ -12,7 +12,7 @@ table.searchResults tr:hover { background-color: #ffffe0; }
 table.searchResults tr { border-bottom: 1px solid #e0dfdb; }
 table.searchResults tr th {
   text-align: left;
-  background-color: #ffe4b5;
+  background-color: #eee9bf;
   padding: 5px;
 }
 table.searchResults tr td { padding: 4px; }

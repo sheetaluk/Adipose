@@ -1,30 +1,63 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Userid:</b>
-  <%= @adipocyte.userId %>
-</p>
-
-<p>
-  <b>Subject:</b>
-  <%= @adipocyte.subject %>
-</p>
-
-<p>
-  <b>Content:</b>
-  <%= @adipocyte.content %>
-</p>
-
-<p>
-  <b>Novotes:</b>
-  <%= @adipocyte.noVotes %>
-</p>
-
-<p>
-  <b>Enabled:</b>
-  <%= @adipocyte.enabled %>
-</p>
-
-
-<%= link_to 'Edit', edit_adipocyte_path(@adipocyte) %> |
-<%= link_to 'Back', adipocytes_path %>
+<div class="contentPane">
+  <div class="contentTitle adipocyteImage">
+    <span class="adipocyteTitle">
+      <%= @adipocyte.subject %>
+    </span>
+  </div><!--#contentTitle-->
+  <div class="contentBody">
+    <div class="adipocyteInfo">
+      <div class="basicInfo">
+        <table>
+          <tr>
+            <th>Created by:</th> 
+            <td><%= @adipocyte.userId %></td> 
+          </tr>
+          <tr>
+            <th>Created on:</th> 
+            <td><%= @adipocyte.created_at %></td>
+          </tr>
+        </table>
+      </div><!--.basicInfo-->
+      <div class="adipocyteFeatures">
+        <div id="votes" class="votesImage">
+          <div>
+            <%= @adipocyte.noVotes %> Votes
+          </div>
+        </div>
+      </div><!--.adipocyteFeatures-->
+      <div class="adipocyteFeatures">
+        <div id="tags">
+          <span class="tag">
+            sheetal
+          </span>
+          <span class="tag">
+            Canaan
+          </span>
+          <span class="tag">
+            June
+          </span>
+        </div>
+      </div><!--.adipocyteFeatures-->
+      <div class="adipocyteActions">
+        <input 
+          id="adipocyteComment" class="adiposeButton" type="Submit" value="Comment" />
+        <input 
+          id="adipocyteEdit" class="adiposeButton" type="Submit" value="Edit" />
+        <input 
+          id="adipocyteArchive" class="adiposeButton" type="Submit" value="Archive" />
+      </div><!--.adipocyteActions-->
+      <div class="adipocyteContent">
+        <%= @adipocyte.content %>
+      </div><!--.adipocyteContent-->
+    </div><!--.adipocyteInfo-->
+  </div><!--.contentBody-->
+</div><!--.contentPane-->
+<script type="text/javascript">
+  $(document).ready(function()
+  {
+    $("#adipocyteEdit").click(function()
+    {
+      document.location = '<%=edit_adipocyte_path(@adipocyte)%>';
+    });
+  });
+</script>

@@ -47,7 +47,7 @@
   background-color: #c5e3bf;
   margin: 5px;
   border-radius: 5px;
-  padding: 3px;
+  padding: 1px;
 }
 .adipocyteInfo .adipocyteContent {
   border-radius: 7px;
@@ -65,4 +65,13 @@
   background-image: url("../images/thumbsUp_70.png");
   background-repeat: no-repeat;
   background-position: 1% 1%;
+}
+.adipocyteForm div.formField { margin: 17px 7px; }
+.adipocyteForm div.formField input { width: 96%; }
+.adipocyteForm div.formField textarea { width: 96%; }
+.adipocyteForm div.actions { margin: 8px 0px 12px 65%; }
+.adipocyteForm hr {
+  width: 96%;
+  color: #e0dfdb;
+  background-color: #e0dfdb;
 }

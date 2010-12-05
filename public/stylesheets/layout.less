@@ -18,7 +18,7 @@ body
 
       span#heading
       {
-        color: @colorBlack;
+        color: @colorVeryDarkGray;
       }
      
       span
@@ -89,7 +89,6 @@ body
     float: left;
     width: 200px;
     height: auto;
-    border-right: 3px solid @colorStainlessSteel;
 
     ul 
     {
@@ -101,14 +100,14 @@ body
 
         a
         { 
-          color: @colorBlack;
+          color: @colorVeryDarkGray;
           text-decoration: none;
           background-color: none;
         }
 
         a:hover
         {
-          font-size: 13px;
+          color: @colorBlack;
         }
 
         input
@@ -173,6 +172,7 @@ body
     width: 550px;
     height: auto;
     background-color: @colorLightYellow;
+    border-left: 3px solid @colorStainlessSteel;
   }
 
   #footer
@@ -207,6 +207,26 @@ body
       padding: 5px;
       margin: 10px 5px;
       border: 1px solid @colorLightYellow;
+    }
+     
+    .formField
+    {
+      label
+      {
+        color: @colorDarkGray;
+      }
+
+      input, textarea
+      {
+        border: 1px solid @colorMidGray;
+        border-radius: 5px;
+        padding: 5px;
+      }
+
+      input:focus,textarea:focus
+      {
+        border: 2px solid @colorDarkGray;
+      }
     }
   }
 }

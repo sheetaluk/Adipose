@@ -20,10 +20,10 @@
     </div>
     <div id="headerBottom">
       <span id="options">
-        <span id="first">  
+        <span first="headerHomeOption">
           Home
         </span>
-        <span id="last">
+        <span id="headerLogoutOption">
           Logout
         </span>
       </span>
@@ -67,10 +67,14 @@
           Tools
         </li>
         <li>
-          Edit Settings
+          <a>
+            Edit Settings
+          </a>
         </li>
         <li>
-          Add User
+          <a>
+            Add User
+          </a>
         </li>
       </ul>
     </div><!--#menu-->
@@ -125,6 +129,25 @@
       {
         if($.trim($(this).attr('value')) == "")
           $(this).attr('value','Username');
+      });
+
+      $("#header").click(function()
+      {
+        document.location = "/";
+      });      
+
+      $("#headerHomeOption").click(function()
+      {
+        document.location = "/";
+      });      
+
+      $(".clearButton").click(function(){
+        $(".formField :input").each(function(){
+          $(this).val('');
+        });
+        $(".formField textarea").each(function(){
+          $(this).val('');
+        });
       });
     });
   </script>
