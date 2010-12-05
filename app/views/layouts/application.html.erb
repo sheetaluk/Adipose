@@ -83,6 +83,8 @@
       <%= yield %>
 
     </div><!--#body-->
+    <div id="notification">
+    </div>
   </div><!--#bodyContent-->
   <div id="footer">
     &copy; Adipose 2010
@@ -95,6 +97,21 @@
        keyCode = window.event.keyCode;
      if( keyCode == 13)
        $("#quickSearchForm").submit();
+    }
+    
+    function notify(title, message)
+    { 
+      $("#notification").attr("title",title);
+      $("#notification").html(message);
+      $("#notification").dialog(
+      {
+        modal: true,
+        height:120,
+        close: function(event,ui)
+        {
+          $("#notification").dialog("destroy");
+        },
+      });
     }
  
     $(document).ready(function()

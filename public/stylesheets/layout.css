@@ -1,3 +1,8 @@
+.dimNote {
+  text-align: center;
+  color: #a6a6a6;
+  font-weight: bold;
+}
 body { margin: 2% 20%; }
 body #bodyContent {
   border-bottom: 1px solid #e0dfdb;
@@ -133,3 +138,9 @@ body .contentPane .formField textarea {
 }
 body .contentPane .formField input:focus { border: 2px solid #757575; }
 body .contentPane .formField textarea:focus { border: 2px solid #757575; }
+body .contentPane .dimNoteMedium {
+  text-align: center;
+  color: #a6a6a6;
+  font-weight: bold;
+  font-size: 14px;
+}

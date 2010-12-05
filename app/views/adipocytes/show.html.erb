@@ -48,7 +48,11 @@
       </div><!--.adipocyteFeatures-->
       <div class="adipocyteActions">
         <input 
-          id="adipocyteComment" class="adiposeButton" type="Submit" value="Comment" />
+          id="adipocyteComment" 
+          data-url="<%= url_for(:action => 'create', :controller => 'comments') %>"
+          class="adiposeButton" 
+          type="Submit" 
+          value="Comment" />
         <input 
           id="adipocyteEdit" class="adiposeButton" type="Submit" value="Edit" />
         <% if(@adipocyte.enabled) %>
@@ -70,12 +74,106 @@
       <div class="adipocyteContent">
         <%= @adipocyte.content %>
       </div><!--.adipocyteContent-->
+      <div class="adipocyteComments">
+        <% if(@adipocyte.comments.size <= 0) %>
+          <% commentDivHeadingClass = "dimNoteMedium" %>
+          <% commentHeading = "No Comments" %>
+        <% else %>  
+          <% commentDivHeadingClass = "commentDivHeading"%>
+          <% commentHeading = "Comments" %>
+        <% end %>  
+        <div class="<%=commentDivHeadingClass%>">
+          <%=commentHeading%>
+        </div>
+        <% @adipocyte.comments.each do |comment| %>
+          <div id="commentsDiv">
+            <div id="commentsCommentId"> 
+              <%= comment.id %>
+            </div><!--#commentsCommentId-->
+            <div id="commentsComment">
+              <div id="commentsCommentInfo">
+                <%= comment.commenter %>
+                on
+                <%= comment.created_at %>
+              </div><!--#commentsCommentInfo-->
+              <div id="commentsCommentContent">
+                "
+                <%= comment.content %>
+                "
+              </div><!--#commentsCommentContent-->
+            </div><!--#commentsComment-->
+          </div>
+        <% end %>
+      </div>
     </div><!--.adipocyteInfo-->
   </div><!--.contentBody-->
+  <div id="newCommentModal" title="Create New Comment">
+    <%= form_for([@adipocyte, @adipocyte.comments.build]) do |f| %>
+      <div class="field">
+        <%= f.label :commenter %><br />
+        <%= f.text_field :commenter %>
+      </div>
+      <div class="field">
+        <%= f.label :content %><br />
+        <%= f.text_area :content %>
+      </div>
+    <% end %>
+  </div><!--#newCommentModal-->
 </div><!--.contentPane-->
 <script type="text/javascript">
+  function openCreateCommentDialog()
+  {        
+    $("#newCommentModal").dialog(
+    {
+      width: 400,
+      modal:true,
+      buttons: 
+      {
+        "Submit": function()
+        {
+          $.post(
+          $("#adipocyteComment").attr("data-url"),
+          {
+            adipocyte_id: "<%=@adipocyte.id%>",
+            commenter: $("#comment_commenter").val(),
+            content: $("#comment_content").val()
+          },
+          function(data)
+          {
+            $("#newCommentModal").dialog("destroy");
+            if(data.success)
+            {
+              alert("pooo");
+            }
+            else
+            {
+              notify("Error","There was a problem posting the comment.");
+            }
+          });
+        },
+        Cancel: function()
+        {
+          $(this).dialog("destroy");
+        }
+      } 
+    });
+  }
+
+  function initCreateCommentDialog()
+  {    
+    $("#newCommentModal").dialog();    
+    $("#newCommentModal").dialog('destroy');   
+  }
+
   $(document).ready(function()
-  {
+  { 
+    initCreateCommentDialog();
+
+    $("#adipocyteComment").click(function()
+    {
+      openCreateCommentDialog();
+    });
+
     $("#adipocyteEdit").click(function()
     {
       document.location = '<%=edit_adipocyte_path(@adipocyte)%>';
@@ -98,7 +196,7 @@
           }
           else
           {
-            alert("Could not cast your vote");
+            notify("Adipocyte","There was a problem casting your vote");
           }
         });
     });
@@ -130,7 +228,7 @@
           }
           else
           {
-            alert("Could not archive adipocyte");
+            notify("Adipocyte","Could not archive adipocyte");
           }
         });
     });

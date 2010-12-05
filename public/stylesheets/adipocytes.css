@@ -61,6 +61,12 @@
   margin: 7px 5px;
   padding: 7px;
 }
+.adipocyteInfo .adipocyteComments {
+  border-radius: 7px;
+  border: 1px solid #eee9bf;
+  margin: 7px 5px;
+  padding: 7px;
+}
 .votesImage {
   background-image: url("../images/thumbsUp_70.png");
   background-repeat: no-repeat;

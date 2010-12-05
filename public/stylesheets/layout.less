@@ -1,5 +1,12 @@
 @import "definitions.less";
 
+.dimNote
+{
+  text-align: center;
+  color: @colorMidGray;
+  font-weight: bold;
+}
+
 body
 {
   margin:2% 20%;
@@ -227,6 +234,12 @@ body
       {
         border: 2px solid @colorDarkGray;
       }
+    }   
+    .dimNoteMedium
+    {
+      .dimNote;
+
+      font-size: 14px;
     }
   }
 }
