@@ -64,9 +64,17 @@ class AdipocytesController < ApplicationController
     end
   end
 
+
+  # PUT /adipocytes/castVote
+  def castVote
+    @adipocyte = Adipocyte.find(params[:id])
+    numVotes = @adipocyte.noVotes + 1
+    @adipocyte.update_attributes(:noVotes => numVotes)
+    render :json => {:success => true, :numberOfVotes => numVotes}
+  end
+
   
-  # PUT /adipocytes/1
-  # PUT /adipocytes/1.xml
+  # PUT /adipocytes/enable
   def enable
     @adipocyte = Adipocyte.find(params[:id])
     if(params[:enabled] == "1")
@@ -74,8 +82,7 @@ class AdipocytesController < ApplicationController
     else
       @adipocyte.update_attributes(:enabled => true)
     end
-    @success = true;
-    render :json => {:success => 'true'}
+    render :json => {:success => true}
   end
 
 

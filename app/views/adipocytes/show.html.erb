@@ -19,8 +19,11 @@
         </table>
       </div><!--.basicInfo-->
       <div class="adipocyteFeatures">
-        <div id="votes" class="votesImage">
-          <div>
+        <div 
+          id="votes" 
+          class="votesImage" 
+          data-url="<%= url_for(:action => 'castVote' , :controller => 'adipocytes')%>">
+          <div id="numberOfVotes">
             <%= @adipocyte.noVotes %>
             <% if(@adipocyte.noVotes > 1)%>
               Votes
@@ -76,6 +79,28 @@
     $("#adipocyteEdit").click(function()
     {
       document.location = '<%=edit_adipocyte_path(@adipocyte)%>';
+    });
+
+    $(".votesImage").click(function()
+    {
+      var url = 
+        $(this).attr("data-url");
+      $.post(
+        url,
+        {
+          id: "<%= @adipocyte.id %>"
+        },
+        function(data)
+        {
+          if(data.success)
+          {
+            $("#numberOfVotes").html(data.numberOfVotes+" "+"Votes");
+          }
+          else
+          {
+            alert("Could not cast your vote");
+          }
+        });
     });
 
     $("#adipocyteArchive").click(function()

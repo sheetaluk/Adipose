@@ -64,7 +64,6 @@
 .votesImage {
   background-image: url("../images/thumbsUp_70.png");
   background-repeat: no-repeat;
-  background-position: 1% 1%;
 }
 .adipocyteForm div.formField { margin: 17px 7px; }
 .adipocyteForm div.formField input { width: 96%; }
