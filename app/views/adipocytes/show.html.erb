@@ -9,7 +9,7 @@
       <div class="basicInfo">
         <table>
           <tr>
-            <th>Created by:</th> 
+            <th>Created By:</th> 
             <td><%= @adipocyte.userId %></td> 
           </tr>
           <tr>
@@ -48,8 +48,21 @@
           id="adipocyteComment" class="adiposeButton" type="Submit" value="Comment" />
         <input 
           id="adipocyteEdit" class="adiposeButton" type="Submit" value="Edit" />
+        <% if(@adipocyte.enabled) %>
+          <% enabledAdipocyte = 1 %>
+          <% enabledText = "Archive" %>
+        <% else %>
+          <% enabledAdipocyte = 0 %>
+          <% enabledText = "Unarchive" %>
+        <% end %>
         <input 
-          id="adipocyteArchive" class="adiposeButton" type="Submit" value="Archive" />
+          data-id="<%= enabledAdipocyte %>"
+          data-url=
+            "<%= url_for(:action => 'enable' , :controller => 'adipocytes')%>"
+          id="adipocyteArchive" 
+          class="adiposeButton" 
+          type="Submit" 
+          value="<%= enabledText %>" />
       </div><!--.adipocyteActions-->
       <div class="adipocyteContent">
         <%= @adipocyte.content %>
@@ -67,7 +80,34 @@
 
     $("#adipocyteArchive").click(function()
     {
-      document.location = '<%=edit_adipocyte_path(@adipocyte)%>';
+      var url = 
+        $(this).attr("data-url");
+      $.post(
+        url,
+        {
+          id: "<%= @adipocyte.id %>",
+          enabled: $(this).attr("data-id")
+        },
+        function(data)
+        {
+          if(data.success)
+          {
+            if($("#adipocyteArchive").attr("data-id") == 1)
+            {
+              $("#adipocyteArchive").attr('value',"Unarchive");
+              $("#adipocyteArchive").attr('data-id','0');
+            }
+            else
+            {
+              $("#adipocyteArchive").attr('value',"Archive");
+              $("#adipocyteArchive").attr('data-id','1');
+            }
+          }
+          else
+          {
+            alert("Could not archive adipocyte");
+          }
+        });
     });
   });
 </script>

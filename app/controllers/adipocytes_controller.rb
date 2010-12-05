@@ -64,6 +64,21 @@ class AdipocytesController < ApplicationController
     end
   end
 
+  
+  # PUT /adipocytes/1
+  # PUT /adipocytes/1.xml
+  def enable
+    @adipocyte = Adipocyte.find(params[:id])
+    if(params[:enabled] == "1")
+      @adipocyte.update_attributes(:enabled => false)
+    else
+      @adipocyte.update_attributes(:enabled => true)
+    end
+    @success = true;
+    render :json => {:success => 'true'}
+  end
+
+
   # DELETE /adipocytes/1
   # DELETE /adipocytes/1.xml
   def destroy
