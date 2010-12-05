@@ -13,7 +13,7 @@
         </tr>
         <% @adipocytes.each do |adipocyte| %>
           <% if adipocyte.enabled %>
-            <% rowEnabled = "enabled" %>
+            <% rowEnabled = "enabled votesEnabled" %>
           <% else %>
             <% rowEnabled = "disabled" %>
           <% end %>
@@ -21,9 +21,16 @@
             <td><%= adipocyte.userId %></td>
             <td><%= adipocyte.subject %></td>
             <td>
-              <%= adipocyte.created_at%>
+              <%= adipocyte.created_at.to_s(format = :short)%>
             </td>
-            <td><%= adipocyte.noVotes %></td>
+            <% if adipocyte.enabled %>
+              <% colEnabled = 'votesGreen votesSummary' %>
+            <% else %>
+              <% colEnabled = 'votesSummary' %>
+            <% end %>
+            <td class="<%= colEnabled %>">
+              <%= adipocyte.noVotes %>
+            </td>
           </tr>
         <% end %>
       </table>

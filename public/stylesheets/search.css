@@ -15,4 +15,15 @@ table.searchResults tr th {
   background-color: #eee9bf;
   padding: 5px;
 }
-table.searchResults tr td { padding: 4px; }
+table.searchResults tr td { padding: 10px; }
+table.searchResults tr .votesSummary {
+  background-image: url("../images/thumbsUp_small.png");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  text-align: center;
+  padding-top: 20px;
+}
+table.searchResults tr .votesGreen {
+  color: #71c671;
+  font-weight: bold;
+}

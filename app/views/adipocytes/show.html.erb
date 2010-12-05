@@ -21,7 +21,12 @@
       <div class="adipocyteFeatures">
         <div id="votes" class="votesImage">
           <div>
-            <%= @adipocyte.noVotes %> Votes
+            <%= @adipocyte.noVotes %>
+            <% if(@adipocyte.noVotes > 1)%>
+              Votes
+            <% else %>
+              Vote
+            <% end %>
           </div>
         </div>
       </div><!--.adipocyteFeatures-->
@@ -56,6 +61,11 @@
   $(document).ready(function()
   {
     $("#adipocyteEdit").click(function()
+    {
+      document.location = '<%=edit_adipocyte_path(@adipocyte)%>';
+    });
+
+    $("#adipocyteArchive").click(function()
     {
       document.location = '<%=edit_adipocyte_path(@adipocyte)%>';
     });

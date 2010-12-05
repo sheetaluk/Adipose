@@ -35,6 +35,7 @@ class AdipocytesController < ApplicationController
   # POST /adipocytes.xml
   def create
     @adipocyte = Adipocyte.new(params[:adipocyte])
+    @adipocyte.update_attributes(:noVotes => 1, :enabled => true)
 
     respond_to do |format|
       if @adipocyte.save
