@@ -144,3 +144,9 @@ body .contentPane .dimNoteMedium {
 }
 .formField input:focus { border: 2px solid #757575; }
 .formField textarea:focus { border: 2px solid #757575; }
+.confirmImage {
+  background-image: url("../images/confirm.png");
+  background-repeat: no-repeat;
+  background-position: center left;
+  padding-left: 50px;
+}

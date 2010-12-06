@@ -126,6 +126,20 @@
     </div>
     <% end %>
   </div><!--#newCommentModal-->
+  <div id="confirmCastVote" title="Cast Vote">
+    <div class="confirmImage" >
+      Please confirm that you want to cast your vote.
+    </div>
+  </div>
+  <div id="confirmArchive"title="Archive">
+    <div class="confirmImage" >
+      Please confirm that you want to 
+      <span id="adipocyteArchiveTextSpan">
+        <%= enabledText %>
+      </span> 
+      this adipocyte.
+    </div>
+  </div>
 </div><!--.contentPane-->
 <script type="text/javascript">
   function openCreateCommentDialog()
@@ -189,15 +203,111 @@
     });
   }
 
-  function initCreateCommentDialog()
+  function openConfirmCastVote(url)
+  {
+    $("#confirmCastVote").dialog(
+    {
+      modal: true,
+      close: function(event,ui)
+      {
+        $("#confirmCastVote").dialog("destroy");
+      },
+      buttons:
+      {
+        "Submit": function()
+        {
+          $.post(
+          url,
+          {
+            id: "<%= @adipocyte.id %>"
+          },
+          function(data)
+          {
+            if(data.success)
+            {
+              $("#numberOfVotes").html(data.numberOfVotes+" "+"Votes");
+            }
+            else
+            {
+              notify("Adipocyte","There was a problem casting your vote");
+            }
+            $("#confirmCastVote").dialog("destroy");
+          });
+        },
+        "Cancel": function()
+        {
+          $("#confirmCastVote").dialog("destroy");
+        }
+      }
+    });
+  }
+
+  function openConfirmArchive(url)
+  {
+    $("#confirmArchive").dialog(
+    {
+      modal: true,
+      close: function(event,ui)
+      {
+        $("#confirmArchive").dialog("destroy");
+      },
+      buttons:
+      {
+        "Submit": function()
+        {
+          $.post(
+          url,
+          {
+            id: "<%= @adipocyte.id %>",
+            enabled: $("#adipocyteArchive").attr("data-id")
+          },
+          function(data)
+          {
+            if(data.success)
+            {
+              if($("#adipocyteArchive").attr("data-id") == 1)
+              {
+                $("#adipocyteArchive").attr('value',"Unarchive");
+                $("#adipocyteArchiveTextSpan").html("Unarchive");
+                $("#adipocyteArchive").attr('data-id','0');
+              }
+              else
+              {
+                $("#adipocyteArchive").attr('value',"Archive");
+                $("#adipocyteArchiveTextSpan").html("Archive");
+                $("#adipocyteArchive").attr('data-id','1');
+              }
+            }
+            else
+            {
+              notify("Adipocyte","Could not archive adipocyte");
+            }
+            $("#confirmArchive").dialog("destroy");
+          });
+        },
+        "Cancel": function()
+        {
+          $("#confirmArchive").dialog("destroy");
+        }
+      }
+    });
+  }
+
+  function initDialogs()
   {    
     $("#newCommentModal").dialog();    
     $("#newCommentModal").dialog('destroy');   
+
+    $("#confirmCastVote").dialog();    
+    $("#confirmCastVote").dialog('destroy');   
+
+    $("#confirmArchive").dialog();    
+    $("#confirmArchive").dialog('destroy');   
   }
 
   $(document).ready(function()
   { 
-    initCreateCommentDialog();
+    initDialogs();
 
     $("#adipocyteComment").click(function()
     {
@@ -212,55 +322,15 @@
     $(".votesImage").click(function()
     {
       var url = 
-        $(this).attr("data-url");
-      $.post(
-        url,
-        {
-          id: "<%= @adipocyte.id %>"
-        },
-        function(data)
-        {
-          if(data.success)
-          {
-            $("#numberOfVotes").html(data.numberOfVotes+" "+"Votes");
-          }
-          else
-          {
-            notify("Adipocyte","There was a problem casting your vote");
-          }
-        });
+        $(this).attr("data-url"); 
+      openConfirmCastVote(url);     
     });
 
     $("#adipocyteArchive").click(function()
     {
       var url = 
         $(this).attr("data-url");
-      $.post(
-        url,
-        {
-          id: "<%= @adipocyte.id %>",
-          enabled: $(this).attr("data-id")
-        },
-        function(data)
-        {
-          if(data.success)
-          {
-            if($("#adipocyteArchive").attr("data-id") == 1)
-            {
-              $("#adipocyteArchive").attr('value',"Unarchive");
-              $("#adipocyteArchive").attr('data-id','0');
-            }
-            else
-            {
-              $("#adipocyteArchive").attr('value',"Archive");
-              $("#adipocyteArchive").attr('data-id','1');
-            }
-          }
-          else
-          {
-            notify("Adipocyte","Could not archive adipocyte");
-          }
-        });
+      openConfirmArchive(url);
     });
   });
 </script>
