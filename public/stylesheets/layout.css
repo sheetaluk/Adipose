@@ -3,6 +3,7 @@
   color: #a6a6a6;
   font-weight: bold;
 }
+html, body { height: 100%; }
 body { margin: 2% 20%; }
 body #bodyContent {
   border-bottom: 1px solid #e0dfdb;

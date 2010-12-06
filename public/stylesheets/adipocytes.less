@@ -69,17 +69,16 @@
     {
       .adipocyteInfoBorder;
 
-
       padding: 10px; 
       min-height: 35px; //FIXME: Lousy way of doing it
       .tag
       {
         float: left;
         border: 1px solid @colorMidGray;
-        background-color: @colorMintIceCream;
+        background-color: @colorPeach;
         margin: 5px;
-        border-radius: 5px;
-        padding: 1px;
+        border-radius: 15px;
+        padding: 1px 5px;
       }
     }
   }
@@ -151,6 +150,11 @@ table#commentsTable
 {
   tbody
   {
+    tr:hover
+    {
+      background-color: @colorLightYellow;
+    }
+
     tr.commentsRow
     {      
       td
