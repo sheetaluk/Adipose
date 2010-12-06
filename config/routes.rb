@@ -77,6 +77,12 @@ Adipose::Application.routes.draw do
       post :create
     end
   end
+  
+  resources :comments do
+    collection do
+      post :delete
+    end
+  end
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.

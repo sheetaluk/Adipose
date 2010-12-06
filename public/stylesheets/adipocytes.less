@@ -15,6 +15,14 @@
   background-position: center;
 }
 
+
+.deleteImage
+{
+  background-image: url("../images/delete_20.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .adipocyteInfoBorder
 {
   border-radius: 7px;
@@ -155,11 +163,18 @@ table#commentsTable
       {
         padding-top: 5%;
         font-weight: bold;
-        color: @colorDarkGray;        
+        color: @colorDarkGray;
+      }
+
+      td.commentsCommentActions
+      {
+        cursor: pointer;
       }
 
       td.commentsComment
       {        
+        width: 100%;       
+
         .commentsCommenter
         {
           color: @colorDarkBrown;

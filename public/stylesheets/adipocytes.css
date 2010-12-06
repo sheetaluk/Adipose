@@ -9,6 +9,11 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+.deleteImage {
+  background-image: url("../images/delete_20.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
 .adipocyteInfoBorder {
   border-radius: 7px;
   border: 1px solid #eee9bf;
@@ -110,6 +115,8 @@ table#commentsTable tbody tr.commentsRow td.commentsCommentId {
   font-weight: bold;
   color: #757575;
 }
+table#commentsTable tbody tr.commentsRow td.commentsCommentActions { cursor: pointer; }
+table#commentsTable tbody tr.commentsRow td.commentsComment { width: 100%; }
 table#commentsTable tbody tr.commentsRow td.commentsComment .commentsCommenter { color: #733d1a; }
 table#commentsTable tbody tr.commentsRow td.commentsComment .commentsCreated {
   font-size: 10px;
