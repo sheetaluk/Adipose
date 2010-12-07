@@ -1,37 +1,79 @@
+<div class="contentPane">
+  <div class="contentTitle newAdipocytesImage">
+    Search Adipocytes
+  </div><!--#contentTitle-->
+  <div class="contentBody">
+    <div>
+      <% form_tag(:action => "wtf") do %>
+        <div class="formField">
+          <%= text_field_tag(:subject,"Subject Contains") %>
+          <%= text_field_tag(:user,"username") %>
+          <%= submit_tag("Search") %>
+        </div><!--formField-->
+      <% end %>
+    </div>
+    <div class="listAdiposts">
+      <table class="searchResults">
+        <tr>
+          <th>Created By</th>
+          <th>Subject</th>
+          <th>Created On</th>
+          <th>Votes</th>
+        </tr>
+        <% @adipocytes.each do |adipocyte| %>
+          <% if adipocyte.enabled %>
+            <% rowEnabled = "enabled votesEnabled" %>
+          <% else %>
+            <% rowEnabled = "disabled" %>
+          <% end %>
+          <tr class="<%= rowEnabled%> searchResult" data-id="<%= adipocyte.id %>">
+            <td><%= adipocyte.userId %></td>
+            <td><%= adipocyte.subject %></td>
+            <td>
+              <%= adipocyte.created_at.to_s(format = :short)%>
+            </td>
+            <% if adipocyte.enabled %>
+              <% colEnabled = 'votesGreen votesSummary' %>
+            <% else %>
+              <% colEnabled = 'votesSummary' %>
+            <% end %>
+            <td class="<%= colEnabled %>">
+              <%= adipocyte.noVotes %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div><!--#listAdiposts-->
+  </div><!--.contentBody-->
+</div><!--.contentPane-->
+<script type="text/javascript">
+  $(document).ready(function()
+  {
+    $(".searchResult").click(function(){
+      document.location = "/adipocytes/"+$(this).attr('data-id');
+    });
 
-<div>
-  <% form_tag(:action => "wtf") do %>
-    <%= text_field_tag(:subject,"Subject Contains") %>
-    <%= text_field_tag(:user,"Created by") %>
-    <%= submit_tag("Search") %>
-  <% end %>
-</div>
+    $("#subject").focus(function()
+    {
+      $(this).attr('value','');
+    });
 
+    $("#user").focus(function()
+    {
+      $(this).attr('value','');
+    });
 
-<h1>Listing adipocytes</h1>
+    $("#subject").blur(function()
+    {
+      if($.trim($(this).attr('value')) == "")
+        $(this).attr('value','Subject Contains');
+    });
 
-<table>
-  <tr>
-    <th>Userid</th>
-    <th>Subject</th>
-    <th>Content</th>
-    <th>Novotes</th>
-    <th>Enabled</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+    $("#user").blur(function()
+    {
+      if($.trim($(this).attr('value')) == "")
+        $(this).attr('value','Username');
+    });
+  });
+</script>
 
-<% @adipocytes.each do |adipocyte| %>
-  <tr>
-    <td><%= adipocyte.userId %></td>
-    <td><%= adipocyte.subject %></td>
-    <td><%= adipocyte.content %></td>
-    <td><%= adipocyte.noVotes %></td>
-    <td><%= adipocyte.enabled %></td>
-    <td><%= link_to 'Show', adipocyte %></td>
-    <td><%= link_to 'Edit', edit_adipocyte_path(adipocyte) %></td>
-    <td><%= link_to 'Destroy', adipocyte, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
