@@ -1,39 +1,47 @@
-<h1>Listing adipocytes</h1>
-
-<table>
-  <tr>
-    <th>Userid</th>
-    <th>Subject</th>
-    <th>Content</th>
-    <th>Novotes</th>
-    <th>Enabled</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @adipocytes.each do |adipocyte| %>
-  <tr>
-    <td><%= adipocyte.userId %></td>
-    <td><%= adipocyte.subject %></td>
-    <td><%= adipocyte.content %></td>
-    <td><%= adipocyte.noVotes %></td>
-    <td><%= adipocyte.enabled %></td>
-    <td><%= link_to 'Show', adipocyte %></td>
-    <td><%= link_to 'Edit', edit_adipocyte_path(adipocyte) %></td>
-    <td><%= link_to 'Destroy', adipocyte, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<div>
-  <% form_tag(:action => "wtf") do %>
-    <%= text_field_tag(:subject,"Subject Contains") %>
-    <%= text_field_tag(:user,"Created by") %>
-    <%= submit_tag("Search") %>
-  <% end %>
-</div>
-
-<%= link_to 'New Adipocyte', new_adipocyte_path %>
+<div class="contentPane">
+  <div class="contentTitle newAdipocytesImage">
+    Recently Created Adipocytes
+  </div><!--#contentTitle-->
+  <div class="contentBody">
+    <div class="listAdiposts">
+      <table class="searchResults">
+        <tr>
+          <th>Created By</th>
+          <th>Subject</th>
+          <th>Created On</th>
+          <th>Votes</th>
+        </tr>
+        <% @adipocytes.each do |adipocyte| %>
+          <% if adipocyte.enabled %>
+            <% rowEnabled = "enabled votesEnabled" %>
+          <% else %>
+            <% rowEnabled = "disabled" %>
+          <% end %>
+          <tr class="<%= rowEnabled%> searchResult" data-id="<%= adipocyte.id %>">
+            <td><%= adipocyte.userId %></td>
+            <td><%= adipocyte.subject %></td>
+            <td>
+              <%= adipocyte.created_at.to_s(format = :short)%>
+            </td>
+            <% if adipocyte.enabled %>
+              <% colEnabled = 'votesGreen votesSummary' %>
+            <% else %>
+              <% colEnabled = 'votesSummary' %>
+            <% end %>
+            <td class="<%= colEnabled %>">
+              <%= adipocyte.noVotes %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div><!--#listAdiposts-->
+  </div><!--.contentBody-->
+</div><!--.contentPane-->
+<script type="text/javascript">
+  $(document).ready(function()
+  {
+    $(".searchResult").click(function(){
+      document.location = "/adipocytes/"+$(this).attr('data-id');
+    });
+  });
+</script>

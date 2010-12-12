@@ -6,6 +6,9 @@
     <div class="listAdiposts">
       <table class="searchResults">
         <tr>
+          <th>
+            <%= check_box_tag "selectAllNewAdipocytes" %>
+          </th>
           <th>Created By</th>
           <th>Subject</th>
           <th>Created On</th>
@@ -18,9 +21,17 @@
             <% rowEnabled = "disabled" %>
           <% end %>
           <tr class="<%= rowEnabled%> searchResult" data-id="<%= adipocyte.id %>">
-            <td><%= adipocyte.userId %></td>
-            <td><%= adipocyte.subject %></td>
             <td>
+              <%= check_box_tag (
+                "newAdipocyte"+adipocyte.id.to_s,
+                "yes",
+                false,
+                :class=>"newAdipocyte", 
+                :"data-id"=>adipocyte.id) %>
+            </td>
+            <td class="toAdipocytePage"><%= adipocyte.userId %></td>
+            <td class="toAdipocytePage"><%= adipocyte.subject %></td>
+            <td class="toAdipocytePage">
               <%= adipocyte.created_at.to_s(format = :short)%>
             </td>
             <% if adipocyte.enabled %>
@@ -40,8 +51,8 @@
 <script type="text/javascript">
   $(document).ready(function()
   {
-    $(".searchResult").click(function(){
-      document.location = "/adipocytes/"+$(this).attr('data-id');
+    $(".toAdipocytePage").click(function(){
+      document.location = "/adipocytes/"+$(this).parent().attr('data-id');
     });
   });
 </script>
