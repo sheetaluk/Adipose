@@ -9,6 +9,14 @@
   background-repeat: no-repeat;
   background-position: center;
 }
+.tagDeleteImage {
+  background-image: url("../images/delete_tag_14.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  float: left;
+  cursor: pointer;
+  margin: 0 0 0 -10px;
+}
 .deleteImage {
   background-image: url("../images/delete_20.png");
   background-repeat: no-repeat;
@@ -51,6 +59,7 @@
   padding: 10px;
   min-height: 35px;
 }
+.adipocyteInfo .adipocyteFeatures #tags .tagDiv { width: auto; }
 .adipocyteInfo .adipocyteFeatures #tags .tag {
   float: left;
   border: 1px solid #a6a6a6;

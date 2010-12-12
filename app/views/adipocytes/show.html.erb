@@ -35,21 +35,25 @@
       </div><!--.adipocyteFeatures-->
       <div class="adipocyteFeatures">
         <div id="tags">
-          <span class="tag">
-            sheetal
-          </span>
-          <span class="tag">
-            Canaan
-          </span>
-          <span class="tag">
-            June
-          </span>
-          <span class="tag">
-            Insia
-          </span>
-          <span class="tag">
-            omg
-          </span>
+          <% if(@adipocyte.tags.size <= 0) %>
+            <div class="dimNoteMedium">
+              No Tags
+            </div>
+          <% else %>  
+            <% @adipocyte.tags.each do |tag| %>
+              <div class="tagDiv" id="tagId<%= tag.id %>">
+                <span class="tag">
+                  <%= tag.tag %>
+                </span>
+                <span 
+                  class="tagDeleteImage" 
+                  data-url="<%= url_for(:action=>'delete', :controller=>'tags')%>"
+                  data-id="<%= tag.id %>">
+                  &nbsp;&nbsp;&nbsp;
+                </span>
+              </div>
+            <% end %>
+          <% end %>
         </div>
       </div><!--.adipocyteFeatures-->
       <div class="adipocyteActions">
@@ -304,7 +308,7 @@
             }
             else
             {
-              notify("Comment","Please confirm that you want to delete this comment");
+              notify("Comment","There was a problem deleting this comment.");
             }
             $("#confirmDelete").dialog("destroy");
           });
@@ -422,4 +426,34 @@
       openConfirmArchive(url);
     });
   });
+
+  $(".tagDeleteImage").live("click",function()
+    {
+      var url = 
+        $(this).attr("data-url");       
+      var id = 
+        $(this).attr("data-id"); 
+   
+      $.post(
+      url,
+      {
+        id: id
+      },
+      function(data)
+      {
+        if(data.success)
+        {
+          $("#tagId"+id).remove();
+          if($(".tagDiv").length <= 0)
+          {
+            $("#tags")
+              .html("<div class='dimNoteMedium'>No Tags</div>");
+          }
+        }
+        else
+        {
+          notify("Tag","There was a problem deleting this tag");
+        }
+      });
+    });
 </script>

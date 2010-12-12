@@ -3,6 +3,10 @@ Adipose::Application.routes.draw do
     resources :comments
   end
 
+  resources :adipocytes do
+    resources :tags
+  end
+
   resources :users
 
   get "search/index"
@@ -79,6 +83,12 @@ Adipose::Application.routes.draw do
   end
   
   resources :comments do
+    collection do
+      post :delete
+    end
+  end
+
+  resources :tags do
     collection do
       post :delete
     end
