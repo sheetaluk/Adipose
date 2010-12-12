@@ -110,7 +110,7 @@ body .disabled { color: #a6a6a6; }
 body .contentPane { margin: 5px; }
 body .contentPane .contentTitle {
   background-color: #fffff0;
-  padding: 10px 60px;
+  padding: 10px 20px 10px 60px;
   margin: 5px;
   font-size: 18px;
   border: 1px solid #ffffe0;

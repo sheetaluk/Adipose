@@ -15,7 +15,8 @@
       class="flagExport floatRight <%= flagClass %>"
       data-url="<%= url_for(:action => 'flagAdipocyte' , :controller => 'adipocytes')%>"
       data-flagged="<%= flagEnabled %>"
-      data-id="<%= @adipocyte.id %>">
+      data-id="<%= @adipocyte.id %>"
+      title="Export to Bug-tracker">
       &nbsp;&nbsp;&nbsp;
     </span>
   </div><!--#contentTitle-->
