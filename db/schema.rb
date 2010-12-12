@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20101212073145) do
     t.boolean  "enabled"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "flagged"
   end
 
   create_table "comments", :force => true do |t|

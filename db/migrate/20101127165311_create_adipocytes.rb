@@ -6,6 +6,7 @@ class CreateAdipocytes < ActiveRecord::Migration
       t.text :content
       t.integer :noVotes
       t.boolean :enabled
+      t.boolean :flagged
 
       t.timestamps
     end

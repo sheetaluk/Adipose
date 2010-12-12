@@ -76,6 +76,12 @@ Adipose::Application.routes.draw do
     end
   end
 
+  resources :adipocytes do
+    collection do
+      post :flag
+    end
+  end
+
   resources :comments do
     collection do
       post :create
