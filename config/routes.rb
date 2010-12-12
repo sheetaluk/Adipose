@@ -8,7 +8,7 @@ Adipose::Application.routes.draw do
   end
 
   resources :users
-
+  
   get "search/index"
 
   # The priority is based upon order of creation:
@@ -78,7 +78,7 @@ Adipose::Application.routes.draw do
 
   resources :adipocytes do
     collection do
-      post :flag
+      post :flagAdipocyte
     end
   end
 

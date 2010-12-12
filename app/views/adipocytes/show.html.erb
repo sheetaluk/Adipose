@@ -11,9 +11,10 @@
       <% flagEnabled="0" %>
     <% end %>
     <span 
+      id="flagExport"
       class="flagExport floatRight <%= flagClass %>"
-      data-url="<%= url_for(:action => 'flag' , :controller => 'adipocytes')%>"
-      data-enabled="<%= flagEnabled %>"
+      data-url="<%= url_for(:action => 'flagAdipocyte' , :controller => 'adipocytes')%>"
+      data-flagged="<%= flagEnabled %>"
       data-id="<%= @adipocyte.id %>">
       &nbsp;&nbsp;&nbsp;
     </span>
@@ -438,6 +439,45 @@
       var url = 
         $(this).attr("data-url");
       openConfirmArchive(url);
+    });
+
+    $(".flagExport").click(function()
+    {
+      var url = 
+        $(this).attr("data-url");
+      var flagged = 
+        $(this).attr("data-flagged");
+      var id = 
+        $(this).attr("data-id");
+
+      $.post(
+      url,
+      {
+        id: id,
+        flagged: flagged
+      },
+      function(data)
+      {
+        if(data.success)
+        {
+          if(flagged=="1")
+          {
+            $("#flagExport")
+              .removeClass("flagEnabledImage").addClass("flagDisabledImage");
+            $("#flagExport").attr("data-flagged","0")
+          }
+          else
+          {
+            $("#flagExport")
+              .removeClass("flagDisabledImage").addClass("flagEnabledImage");
+            $("#flagExport").attr("data-flagged","1")
+          }
+        }
+        else
+        {
+          notify("Flag","There was a problem flagging this adipocyte");
+        }
+      });
     });
   });
 

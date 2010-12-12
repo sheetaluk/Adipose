@@ -72,7 +72,6 @@ class AdipocytesController < ApplicationController
     @adipocyte.update_attributes(:noVotes => numVotes)
     render :json => {:success => true, :numberOfVotes => numVotes}
   end
-
   
   # PUT /adipocytes/enable
   def enable
@@ -81,6 +80,16 @@ class AdipocytesController < ApplicationController
       @adipocyte.update_attributes(:enabled => false)
     else
       @adipocyte.update_attributes(:enabled => true)
+    end
+    render :json => {:success => true}
+  end
+
+  def flagAdipocyte
+    @adipocyte = Adipocyte.find(params[:id])
+    if(params[:flagged] == "1")
+      @adipocyte.update_attributes(:flagged => false)
+    else
+      @adipocyte.update_attributes(:flagged => true)
     end
     render :json => {:success => true}
   end
