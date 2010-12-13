@@ -1,56 +1,83 @@
 <div class="contentPane">
   <div class="contentTitle newAdipocytesImage">
-    Recently Created Adipocytes
+    Adipocytes
   </div><!--#contentTitle-->
   <div class="contentBody">
-    <div class="listAdiposts">
-      <table class="searchResults">
-        <tr>
-          <th>
-            <%= check_box_tag "selectAllNewAdipocytes" %>
-          </th>
-          <th>Created By</th>
-          <th>Subject</th>
-          <th>Created On</th>
-          <th>Votes</th>
-        </tr>
-        <% @adipocytes.each do |adipocyte| %>
-          <% if adipocyte.enabled %>
-            <% rowEnabled = "enabled votesEnabled" %>
-          <% else %>
-            <% rowEnabled = "disabled" %>
-          <% end %>
-          <tr class="<%= rowEnabled%> searchResult" data-id="<%= adipocyte.id %>">
-            <td>
-              <%= check_box_tag (
-                "newAdipocyte"+adipocyte.id.to_s,
-                "yes",
-                false,
-                :class=>"newAdipocyte", 
-                :"data-id"=>adipocyte.id) %>
-            </td>
-            <td class="toAdipocytePage"><%= adipocyte.userId %></td>
-            <td class="toAdipocytePage"><%= adipocyte.subject %></td>
-            <td class="toAdipocytePage">
-              <%= adipocyte.created_at.to_s(format = :short)%>
-            </td>
-            <% if adipocyte.enabled %>
-              <% colEnabled = 'votesGreen votesSummary' %>
-            <% else %>
-              <% colEnabled = 'votesSummary' %>
+    <div id="tabs">
+      <ul>
+        <li>
+          <a href="#recentAdipocytesTab">Recent</a>
+        </li>
+        <li>
+          <a href="#popularAdipocytes">Popular</a>
+        </li>
+        <li>
+          <a href="#flaggedAdipocytes">Flagged</a>
+        </li>
+      </ul>
+      <div id="recentAdipocytesTab">
+        <div class="newAdipocytesOptionsDiv">
+          <%= select(
+            'newAdipocytesOptions',
+            'optionId',
+              [["Select Action","-1"],["Archive","1"],["Unarchive","2"],["Flag","3"],["Unflag","4"],["Tag","5"],["Untag","6"],["Download","7"]])%>  
+        </div><!--newAdipocytesOptinsDiv-->
+        <div class="listAdipocytes">
+          <table class="searchResults">
+            <tr>
+              <th>
+                <%= check_box_tag "selectAllNewAdipocytes" %>
+              </th>
+              <th>Created By</th>
+              <th>Subject</th>
+              <th>Created On</th>
+              <th>Votes</th>
+            </tr>
+            <% @adipocytes.each do |adipocyte| %>
+              <% if adipocyte.enabled %>
+                <% rowEnabled = "enabled votesEnabled" %>
+              <% else %>
+                <% rowEnabled = "disabled" %>
+              <% end %>
+              <tr class="<%= rowEnabled%> searchResult" data-id="<%= adipocyte.id %>">
+                <td>
+                  <%= check_box_tag (
+                    "newAdipocyte"+adipocyte.id.to_s,
+                    "yes",
+                    false,
+                    :class=>"newAdipocyte", 
+                    :"data-id"=>adipocyte.id) %>
+                </td>
+                <td class="toAdipocytePage"><%= adipocyte.userId %></td>
+                <td class="toAdipocytePage"><%= adipocyte.subject %></td>
+                <td class="toAdipocytePage">
+                  <%= adipocyte.created_at.to_s(format = :short)%>
+                </td>
+                <% if adipocyte.enabled %>
+                  <% colEnabled = 'votesGreen votesSummary' %>
+                <% else %>
+                  <% colEnabled = 'votesSummary' %>
+                <% end %>
+                <td class="<%= colEnabled %>">
+                  <%= adipocyte.noVotes %>
+                </td>
+              </tr>
             <% end %>
-            <td class="<%= colEnabled %>">
-              <%= adipocyte.noVotes %>
-            </td>
-          </tr>
-        <% end %>
-      </table>
-    </div><!--#listAdiposts-->
+          </table>
+        </div><!--#listAdipocytes-->
+      </div><!--#recentAdipocytesTab-->
+      <div id="popularAdipocytes">
+      </div><!--#popularAdipocytes-->
+      <div id="flaggedAdipocytes">
+      </div><!--#flaggedAdipocytes-->
+    </div><!--#tabs-->
   </div><!--.contentBody-->
 </div><!--.contentPane-->
 <script type="text/javascript">
   $(document).ready(function()
   {
+    $("#tabs").tabs();
+
     $(".toAdipocytePage").click(function(){
       document.location = "/adipocytes/"+$(this).parent().attr('data-id');
     });

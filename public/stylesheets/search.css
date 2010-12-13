@@ -3,6 +3,7 @@
   background-repeat: no-repeat;
   border-radius: 5px;
 }
+#newAdipocytesOptions_optionId { margin: 10px; }
 table.searchResults {
   width: 97%;
   margin: 2px 5px 2px 5px;
