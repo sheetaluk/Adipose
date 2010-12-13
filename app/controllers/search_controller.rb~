@@ -9,11 +9,14 @@ class SearchController < ApplicationController
   end
 
   def wtf
-    # @results = Adipocyte.find(:all, :conditions => ["userId = ? AND subject = ?", params[:name], params[:subject]])
-    @results = Adipocyte.all
-    respond_to do |format|
+    @adipocytes = 
+      Adipocyte.all( 
+        :conditions => ["userId = ? AND subject LIKE ?", 
+          params[:user], 
+          "%#{params[:subject]}%"])
+   respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @results }
+      format.xml  { render :xml => @adipocytes }
     end
   end
 end

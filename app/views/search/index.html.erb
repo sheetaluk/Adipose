@@ -66,10 +66,59 @@
           </table>
         </div><!--#listAdipocytes-->
       </div><!--#recentAdipocytesTab-->
+      <div id="flaggedAdipocytes">
+        <div class="flaggedAdipocytesOptionsDiv">
+          <%= select(
+            'flaggedAdipocytesOptions',
+            'optionId',
+              [["Select Action","-1"],["Unflag","1"],["Download","2"]])%>  
+        </div><!--.flaggedAdipocytesOptinsDiv-->
+        <div class="listFlaggedAdipocytes">
+          <table class="searchResults">
+            <tr>
+              <th>
+                <%= check_box_tag "selectAllFlaggedAdipocytes" %>
+              </th>
+              <th>Created By</th>
+              <th>Subject</th>
+              <th>Created On</th>
+              <th>Votes</th>
+            </tr>
+            <% @flaggedAdipocytes.each do |adipocyte| %>
+              <% if adipocyte.enabled %>
+                <% rowEnabled = "enabled votesEnabled" %>
+              <% else %>
+                <% rowEnabled = "disabled" %>
+              <% end %>
+              <tr class="<%= rowEnabled%> searchResult" data-id="<%= adipocyte.id %>">
+                <td>
+                  <%= check_box_tag (
+                    "flaggedAdipocyte"+adipocyte.id.to_s,
+                    "yes",
+                    false,
+                    :class=>"flaggedAdipocyte", 
+                    :"data-id"=>adipocyte.id) %>
+                </td>
+                <td class="toAdipocytePage"><%= adipocyte.userId %></td>
+                <td class="toAdipocytePage"><%= adipocyte.subject %></td>
+                <td class="toAdipocytePage">
+                  <%= adipocyte.created_at.to_s(format = :short)%>
+                </td>
+                <% if adipocyte.enabled %>
+                  <% colEnabled = 'votesGreen votesSummary' %>
+                <% else %>
+                  <% colEnabled = 'votesSummary' %>
+                <% end %>
+                <td class="<%= colEnabled %>">
+                  <%= adipocyte.noVotes %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </div><!--#listFlaggedAdipocytes-->
+      </div><!--#flaggedAdipocytes-->
       <div id="popularAdipocytes">
       </div><!--#popularAdipocytes-->
-      <div id="flaggedAdipocytes">
-      </div><!--#flaggedAdipocytes-->
     </div><!--#tabs-->
   </div><!--.contentBody-->
 </div><!--.contentPane-->
