@@ -9,10 +9,10 @@
           <a href="#recentAdipocytesTab">Recent</a>
         </li>
         <li>
-          <a href="#popularAdipocytes">Popular</a>
+          <a href="#popularAdipocytesTab">Popular</a>
         </li>
         <li>
-          <a href="#flaggedAdipocytes">Flagged</a>
+          <a href="#flaggedAdipocytesTab">Flagged</a>
         </li>
       </ul>
       <div id="recentAdipocytesTab">
@@ -66,7 +66,7 @@
           </table>
         </div><!--#listAdipocytes-->
       </div><!--#recentAdipocytesTab-->
-      <div id="flaggedAdipocytes">
+      <div id="flaggedAdipocytesTab">
         <div class="flaggedAdipocytesOptionsDiv">
           <%= select(
             'flaggedAdipocytesOptions',
@@ -116,9 +116,58 @@
             <% end %>
           </table>
         </div><!--#listFlaggedAdipocytes-->
-      </div><!--#flaggedAdipocytes-->
-      <div id="popularAdipocytes">
-      </div><!--#popularAdipocytes-->
+      </div><!--#flaggedAdipocytesTab-->
+      <div id="popularAdipocytesTab">
+        <div class="popularAdipocytesOptionsDiv">
+          <%= select(
+            'newAdipocytesOptions',
+            'optionId',
+              [["Select Action","-1"],["Archive","1"],["Unarchive","2"],["Flag","3"],["Unflag","4"],["Tag","5"],["Untag","6"],["Download","7"]])%>  
+        </div><!--.popularAdipocytesOptinsDiv-->
+        <div class="popularAdipocytes">
+          <table class="searchResults">
+            <tr>
+              <th>
+                <%= check_box_tag "selectAllPopularAdipocytes" %>
+              </th>
+              <th>Created By</th>
+              <th>Subject</th>
+              <th>Created On</th>
+              <th>Votes</th>
+            </tr>
+            <% @popularAdipocytes.each do |adipocyte| %>
+              <% if adipocyte.enabled %>
+                <% rowEnabled = "enabled votesEnabled" %>
+              <% else %>
+                <% rowEnabled = "disabled" %>
+              <% end %>
+              <tr class="<%= rowEnabled%> searchResult" data-id="<%= adipocyte.id %>">
+                <td>
+                  <%= check_box_tag (
+                    "popularAdipocyte"+adipocyte.id.to_s,
+                    "yes",
+                    false,
+                    :class=>"popularAdipocyte", 
+                    :"data-id"=>adipocyte.id) %>
+                </td>
+                <td class="toAdipocytePage"><%= adipocyte.userId %></td>
+                <td class="toAdipocytePage"><%= adipocyte.subject %></td>
+                <td class="toAdipocytePage">
+                  <%= adipocyte.created_at.to_s(format = :short)%>
+                </td>
+                <% if adipocyte.enabled %>
+                  <% colEnabled = 'votesGreen votesSummary' %>
+                <% else %>
+                  <% colEnabled = 'votesSummary' %>
+                <% end %>
+                <td class="<%= colEnabled %>">
+                  <%= adipocyte.noVotes %>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </div><!--.popularAdipocytes-->
+      </div><!--#popularAdipocytesTab-->
     </div><!--#tabs-->
   </div><!--.contentBody-->
 </div><!--.contentPane-->

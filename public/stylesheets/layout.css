@@ -148,3 +148,4 @@ body .contentPane .dimNoteMedium {
   padding-left: 50px;
 }
 .floatRight { float: right; }
+.ui-widget-content { border: none; }

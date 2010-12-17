@@ -1,10 +1,13 @@
 class SearchController < ApplicationController
   def index
     @adipocytes = Adipocyte.all
+    @flaggedAdipocytes = 
+      Adipocyte.all(
+        :conditions =>	{ :flagged => 1}) 
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @adipocytes }
+      format.xml  { render :xml => @adipocytes, :xml => @flaggedAdipocytes}
     end
   end
 
