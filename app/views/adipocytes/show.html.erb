@@ -290,7 +290,19 @@
             $("#newTagModal").dialog("destroy");
             if(data.success)
             {
-              alert("hello");
+              $("#tags").append(
+                "<div class='tagDiv' id='tagId"
+                +data.tagId
+                +"'>"
+                +"<span class='tag'>"
+                +$("#tag_tag").val()
+                +"</span>"
+                +"<span class='tagDeleteImage' data-url='/tags/delete' data-id='"
+                +data.tagId
+                +"'>"
+                +"&nbsp;&nbsp;&nbsp;"
+                +"</span>"
+                +"</div>");
               clearForm();
             }
             else
