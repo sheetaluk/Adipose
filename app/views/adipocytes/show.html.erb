@@ -74,6 +74,12 @@
       </div><!--.adipocyteFeatures-->
       <div class="adipocyteActions">
         <input 
+          id="adipocyteTag" 
+          data-url="<%= url_for(:action => 'create', :controller => 'tags') %>"
+          class="adiposeButton" 
+          type="Submit" 
+          value="Tag" />
+        <input 
           id="adipocyteComment" 
           data-url="<%= url_for(:action => 'create', :controller => 'comments') %>"
           class="adiposeButton" 
@@ -158,6 +164,16 @@
     </div>
     <% end %>
   </div><!--#newCommentModal-->
+  <div id="newTagModal" title="Create New Tag">
+    <%= form_for([@adipocyte, @adipocyte.tags.build]) do |f| %>
+    <div class="tagForm">
+      <div class="formField">
+        <%= f.label :tag %><br />
+        <%= f.text_field :tag %>
+      </div>
+    </div>
+    <% end %>
+  </div><!--#newTagModal-->
   <div id="confirmCastVote" title="Cast Vote">
     <div class="confirmImage" >
       Please confirm that you want to cast your vote.
@@ -251,6 +267,46 @@
       } 
     });
   }
+
+
+  function openCreateTagDialog()
+  {        
+    $("#newTagModal").dialog(
+    {
+      width: 300,
+      modal:true,
+      buttons: 
+      {
+        "Submit": function()
+        {
+          $.post(
+          $("#adipocyteTag").attr("data-url"),
+          {
+            adipocyte_id: "<%=@adipocyte.id%>",
+            tag: $("#tag_tag").val()
+          },
+          function(data)
+          {
+            $("#newTagModal").dialog("destroy");
+            if(data.success)
+            {
+              alert("hello");
+              clearForm();
+            }
+            else
+            {
+              notify("Error","There was a problem creating the tag.");
+            }
+          });
+        },
+        Cancel: function()
+        {
+          $(this).dialog("destroy");
+        }
+      } 
+    });
+  }
+
 
   function openConfirmCastVote(url)
   {
@@ -393,6 +449,9 @@
     $("#newCommentModal").dialog();    
     $("#newCommentModal").dialog('destroy');   
 
+    $("#newTagModal").dialog();    
+    $("#newTagModal").dialog('destroy');   
+
     $("#confirmCastVote").dialog();    
     $("#confirmCastVote").dialog('destroy');   
 
@@ -412,6 +471,13 @@
     {
       openCreateCommentDialog();
     });
+
+
+    $("#adipocyteTag").live('click',function()
+    {
+      openCreateTagDialog();
+    });
+
 
     $("#adipocyteEdit").click(function()
     {

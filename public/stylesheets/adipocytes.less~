@@ -1,5 +1,21 @@
 @import "definitions.less";
 
+.flagEnabledImage
+{
+  background-image: url("../images/flag-enabled.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.flagDisabledImage
+{
+  background-image: url("../images/flag-disabled.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
 .adipocyteImage
 {
   background-image: url("../images/adipocyte_52.png");
@@ -15,6 +31,15 @@
   background-position: center;
 }
 
+.tagDeleteImage
+{
+  background-image: url("../images/delete_tag_14.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  float: left;
+  cursor: pointer;
+  margin: 0 0 0 -10px;
+}
 
 .deleteImage
 {
@@ -71,6 +96,12 @@
 
       padding: 10px; 
       min-height: 35px; //FIXME: Lousy way of doing it
+
+      .tagDiv
+      {
+        width: auto;
+      }
+
       .tag
       {
         float: left;

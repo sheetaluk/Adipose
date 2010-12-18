@@ -96,6 +96,12 @@ Adipose::Application.routes.draw do
 
   resources :tags do
     collection do
+      post :create
+    end
+  end
+
+  resources :tags do
+    collection do
       post :delete
     end
   end
